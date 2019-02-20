@@ -19,11 +19,13 @@
 
     <modules>
         <module>spring-cloud-gateway</module>
-        <module>spring-cloud-eureka-server</module>
+
         <module>spring-cloud-service-user</module>
         <module>spring-cloud-webflux-user</module>
         <module>spring-cloud-service-useuser</module>
         <module>spring-cloud-eureka-server-1</module>
+        <module>spring-cloud-eureka-server-2</module>
+        <module>spring-cloud-eureka-server-3</module>
     </modules>
 
     <properties>

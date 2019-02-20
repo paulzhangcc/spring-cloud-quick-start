@@ -10,7 +10,7 @@
 
 	<artifactId>spring-cloud-eureka-server-1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringCloudEurekaServer</name>
+	<name>SpringCloudEurekaServer1</name>
 
 	<dependencies>
 		<dependency>

@@ -8,9 +8,9 @@
 		<version>0.0.1</version>
 	</parent>
 
-	<artifactId>spring-cloud-eureka-server</artifactId>
+	<artifactId>spring-cloud-eureka-server-2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringCloudEurekaServer</name>
+	<name>SpringCloudEurekaServer2</name>
 
 	<dependencies>
 		<dependency>
