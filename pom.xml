@@ -20,9 +20,12 @@
     <modules>
         <module>spring-cloud-gateway</module>
 
-        <module>spring-cloud-service-user</module>
+
         <module>spring-cloud-webflux-user</module>
-        <module>spring-cloud-service-useuser</module>
+        <module>spring-cloud-service-a</module>
+        <module>spring-cloud-service-b</module>
+        <module>spring-cloud-service-c</module>
+        <module>spring-cloud-service-d</module>
         <module>spring-cloud-eureka-server-1</module>
         <module>spring-cloud-eureka-server-2</module>
         <module>spring-cloud-eureka-server-3</module>
@@ -64,6 +67,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
 
     </dependencies>
