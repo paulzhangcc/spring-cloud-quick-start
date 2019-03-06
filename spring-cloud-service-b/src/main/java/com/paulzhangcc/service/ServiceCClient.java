@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient("service-c")
 public interface ServiceCClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/application/name")
+    @RequestMapping(method = RequestMethod.GET, value = "/test/name")
     String name();
 }

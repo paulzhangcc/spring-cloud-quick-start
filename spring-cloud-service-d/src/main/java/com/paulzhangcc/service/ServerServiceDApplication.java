@@ -28,6 +28,5 @@ public class ServerServiceDApplication {
         return applicationName;
     }
 
-
 }
 

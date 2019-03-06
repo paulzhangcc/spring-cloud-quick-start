@@ -4,14 +4,16 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 /**
  * @author paul
  * @description
- * @date 2019/3/4
+ * @date 2019/3/6
  */
-@FeignClient("service-d")
-public interface ServiceDClient {
+@FeignClient("service-b")
+public interface ServiceBClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/test/name")
-    String name();
+    public List<String> name();
 }

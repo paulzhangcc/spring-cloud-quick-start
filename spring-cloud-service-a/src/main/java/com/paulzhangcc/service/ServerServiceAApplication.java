@@ -1,5 +1,8 @@
 package com.paulzhangcc.service;
 
+import brave.Tracer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -8,18 +11,16 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.cloud.client.loadbalancer.ServiceInstanceChooser;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import zipkin2.Span;
+import zipkin2.reporter.Reporter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 /**
  * @author paul
@@ -71,7 +72,7 @@ public class ServerServiceAApplication {
     @Autowired
     ServiceBClient serviceBClient;
 
-    @GetMapping("/application/name")
+    @GetMapping("/test/name")
     public List<String> applications() {
         List<String> list = new ArrayList<>();
         list.add(applicationName);
@@ -79,12 +80,6 @@ public class ServerServiceAApplication {
         return list;
     }
 
-    @FeignClient("service-b")
-    public static interface ServiceBClient {
-
-        @RequestMapping(method = RequestMethod.GET, value = "/application/name")
-        public List<String> name();
-    }
 
 
 }

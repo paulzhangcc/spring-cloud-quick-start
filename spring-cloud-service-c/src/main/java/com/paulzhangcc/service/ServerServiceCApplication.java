@@ -23,10 +23,13 @@ public class ServerServiceCApplication {
         SpringApplication.run(ServerServiceCApplication.class, args);
     }
 
-    @GetMapping("/application/name")
+    @GetMapping("/test/name")
     public String list() {
        return applicationName;
     }
+
+
+
 
 }
 
