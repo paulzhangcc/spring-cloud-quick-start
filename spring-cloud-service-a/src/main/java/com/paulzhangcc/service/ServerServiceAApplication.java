@@ -72,12 +72,17 @@ public class ServerServiceAApplication {
     @Autowired
     ServiceBClient serviceBClient;
 
-    @GetMapping("/test/name")
+    @GetMapping("/name")
     public List<String> applications() {
         List<String> list = new ArrayList<>();
         list.add(applicationName);
         list.addAll(serviceBClient.name());
         return list;
+    }
+
+    @GetMapping("/test/name")
+    public String test() {
+        return (applicationName);
     }
 
 
