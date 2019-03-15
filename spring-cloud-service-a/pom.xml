@@ -5,11 +5,10 @@
 	<parent>
 		<groupId>com.paulzhangcc</groupId>
 		<artifactId>spring-cloud-all</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>spring-cloud-service-a</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringCloudServiceA</name>
 
 	<dependencies>

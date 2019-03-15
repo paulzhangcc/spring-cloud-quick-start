@@ -8,20 +8,19 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>spring-cloud-webflux-user</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringCloudWebfluxUser</name>
+	<artifactId>spring-cloud-eureka-server</artifactId>
+	<name>SpringCloudEurekaServer</name>
 
 	<dependencies>
-		<!--<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>-->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.paulzhangcc</groupId>
+			<artifactId>spring-cloud-config-apollo-client</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

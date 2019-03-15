@@ -38,6 +38,13 @@ public class TestMono {
     }
 
     public static void main(String[] args) throws InterruptedException {
+
+        Mono.just("nihao").subscribe((t)->{
+            System.out.println(t);
+        });
+        System.out.println(1);
+
+
         Boolean.TRUE.equals(false);
 
 

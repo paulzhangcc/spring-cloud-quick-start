@@ -12,30 +12,33 @@
 
     <groupId>com.paulzhangcc</groupId>
     <artifactId>spring-cloud-all</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>spring-cloud-all</name>
 
     <modules>
         <module>spring-cloud-gateway</module>
-
-
         <module>spring-cloud-webflux-user</module>
         <module>spring-cloud-service-a</module>
         <module>spring-cloud-service-b</module>
         <module>spring-cloud-service-c</module>
         <module>spring-cloud-service-d</module>
-        <module>spring-cloud-eureka-server-1</module>
-        <module>spring-cloud-eureka-server-2</module>
-        <module>spring-cloud-eureka-server-3</module>
+        <module>spring-cloud-eureka-server</module>
+        <module>spring-cloud-config-apollo-client</module>
+        <module>spring-cloud-common</module>
+        <module>spring-cloud-service-modules</module>
     </modules>
+
+
+
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <spring-cloud.version>Greenwich.RC2</spring-cloud.version>
+        <skipTests>true</skipTests>
     </properties>
 
     <dependencyManagement>
@@ -46,6 +49,18 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.paulzhangcc</groupId>
+                <artifactId>spring-cloud-config-apollo-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.paulzhangcc</groupId>
+                <artifactId>spring-cloud-common</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -68,7 +83,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>

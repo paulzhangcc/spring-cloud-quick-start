@@ -20,6 +20,7 @@ public class MyGlobalFilter implements GlobalFilter,Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        exchange.getAttributes().put("nihao","1");
         logger.info("===========GlobalFilter:start");
         return chain.filter(exchange).doOnSuccess(v -> {
             logger.info("===========GlobalFilter:end");
