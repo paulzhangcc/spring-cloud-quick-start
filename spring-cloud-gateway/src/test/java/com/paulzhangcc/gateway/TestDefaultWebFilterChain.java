@@ -3,7 +3,6 @@ package com.paulzhangcc.gateway;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebHandler;
 import org.springframework.web.server.handler.DefaultWebFilterChain;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
@@ -16,66 +15,52 @@ import java.util.List;
  */
 public class TestDefaultWebFilterChain {
     public static void main(String[] args) {
-//        Mono<String> stringMono = Mono.defer(() -> {
-//            System.out.println(1);
-//            return Mono.defer(() -> {
-//                System.out.println(2);
-//                return Mono.defer(() -> {
-//                    System.out.println(3);
-//                    return Mono.just("hello world").doOnSuccess(v -> System.out.println(33));
-//                }).doOnSuccess(v -> System.out.println(22));
-//            }).doOnSuccess(v -> System.out.println(11));
-//        }).doOnSuccess(v -> System.out.println(0));
-//        stringMono.subscribe(v-> System.out.println(":::"+v));
+
+        Mono.just(0)
+                .map(v->{
+                    v= v+1;
+                    return v;
+                }).log()
+                .subscribe(System.out::println);
+
+        if (1 == 1) {
+            return;
+        }
+        //Mono.just("hello").log().then(Mono.just("world").log()).log().subscribe(System.out::println);
 
 
-        Mono<String> stringMono0 = Mono.just("hello world")
-                //.doOnSuccess(v -> System.out.println(33))
-        ;
-//        stringMono0.subscribe();
-
-
-
+        Mono<String> stringMono0 = Mono.just("hello world");
         Mono<String> stringMono1 = Mono.defer(() -> {
             System.out.println(3);
             return stringMono0;
-        })
-                //.doOnSuccess(v -> System.out.println(22))
-        ;
+        });
 
         Mono.fromDirect(
                 stringMono1
         ).subscribe(System.out::println);
 
-
-
-
-
-        Flux.just(1,2,3,4).concatMap(t->{
-            System.out.println("index"+t);
-            int i = t.intValue();
-            return  Mono.just("hello:"+i);
-        }).log("Range").subscribe(System.out::println);
-        System.out.println("==================================");
-
-        if (1==1){
+        if (1 == 1) {
             return;
         }
-        WebHandler webHandler = (exchange)->{
+
+        if (1 == 1) {
+            return;
+        }
+        WebHandler webHandler = (exchange) -> {
             System.out.println(1);
             return Mono.empty();
         };
 
-        WebFilter webFilter1 = (exchange,chain)->{
+        WebFilter webFilter1 = (exchange, chain) -> {
             System.out.println("Filter-1-start");
-            return chain.filter(exchange).doOnSuccess(t->{
+            return chain.filter(exchange).doOnSuccess(t -> {
                 System.out.println("Filter-1-end");
             });
         };
 
-        WebFilter webFilter2 = (exchange,chain)->{
+        WebFilter webFilter2 = (exchange, chain) -> {
             System.out.println("Filter-2-start");
-            return chain.filter(exchange).doOnSuccess(t->{
+            return chain.filter(exchange).doOnSuccess(t -> {
                 System.out.println("Filter-2-end");
             });
         };

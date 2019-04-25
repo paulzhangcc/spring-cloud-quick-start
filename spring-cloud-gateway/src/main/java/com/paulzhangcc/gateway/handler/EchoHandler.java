@@ -12,6 +12,9 @@ import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
+import org.springframework.data.redis.core.ReactiveValueOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Hooks;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
@@ -42,6 +46,38 @@ public class EchoHandler {
 
     @Autowired
     DiscoveryClient discoveryClient;
+
+    @Autowired
+    RedisTemplate<String,String> stringRedisTemplate;
+
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    @Autowired
+    ReactiveRedisTemplate<String, String> reactiveRedisTemplate;
+
+    @GetMapping(value = "/gateway/redis", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Mono<Map> redis(ServerWebExchange serverWebExchange) {
+
+
+        ReactiveValueOperations<String, String> stringStringReactiveValueOperations = reactiveRedisTemplate.opsForValue();
+
+        Hooks.resetOnOperatorDebug();
+//        Hooks.onEachOperator((v)->{
+//            logger.info("====="+v.toString());
+//            return v;
+//        });
+        Mono<String> name = stringStringReactiveValueOperations.get("name");
+        name.subscribe((value)->{
+            System.out.println("============"+value);
+        });
+        //Hooks.resetOnEachOperator();
+
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("hello", "world");
+        return Mono.just(map);
+    }
 
     @GetMapping(value = "/gateway/ping", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Mono<Map> ping(ServerWebExchange serverWebExchange) {

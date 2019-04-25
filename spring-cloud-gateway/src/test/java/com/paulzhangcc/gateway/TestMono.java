@@ -6,10 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.CoreSubscriber;
 import reactor.core.publisher.*;
 import reactor.core.scheduler.Schedulers;
 import reactor.netty.http.client.HttpClient;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.BiConsumer;
 
@@ -38,15 +41,71 @@ public class TestMono {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        String block = Mono.just("hello world").block(Duration.ofSeconds(10));
 
-        Mono.just("nihao").subscribe((t)->{
+
+
+        Mono.just("").subscribe(System.out::println);
+
+        Mono.create(
+                sink -> sink.success("create MonoSink")
+        ).subscribe(
+                System.out::println
+        );
+
+//        Mono.create(monoSink -> {
+//        }).block(Duration.ofSeconds(10));
+
+
+        Mono.defer(() -> {
+            logger.info("产生数据");
+            return Mono.just("hello");
+        }).
+                subscribe();
+
+
+        if (1 == 1) {
+            return;
+        }
+
+        long epochSecond = Instant.now().getEpochSecond();
+
+        System.out.println(epochSecond);
+
+
+        Flux.just(1, 2, 3, 4, 5)
+                .map(i -> i * i)
+                .subscribe(new CoreSubscriber<Integer>() {
+
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Integer.MAX_VALUE);
+                    }
+
+                    @Override
+                    public void onNext(Integer o) {
+                        System.out.println(o);
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+
+        Mono.just("nihao").subscribe((t) -> {
             System.out.println(t);
         });
         System.out.println(1);
 
 
         Boolean.TRUE.equals(false);
-
 
 
         WebClient.builder().baseUrl("http://www.baidu.com").build().get().uri("/")
@@ -62,7 +121,6 @@ public class TestMono {
         processor.subscribe(t -> {
             logger.info(t.toString());
         });
-
 
 
         Flux.just("1234", "56A78", "11223").flatMap(k -> Flux.just(Integer.parseInt(k))).doOnError(System.err::println).subscribe(System.out::println);
@@ -202,6 +260,7 @@ public class TestMono {
         });
 
     }
+
     @Test
     public void testWebClient() throws InterruptedException {
         Mono<String> resp = WebClient.create()
@@ -210,15 +269,15 @@ public class TestMono {
                 .retrieve()
                 .bodyToMono(String.class);
 
-        resp.subscribe(t->{
-            logger.info("---------------"+t);
+        resp.subscribe(t -> {
+            logger.info("---------------" + t);
         });
 
         HttpClient.create().baseUrl("http://127.0.0.1:9000")
                 .post().uri("/user/list")
-                .response().subscribe(response->{
-                    logger.info("---------------"+response);
-                });
+                .response().subscribe(response -> {
+            logger.info("---------------" + response);
+        });
 
         logger.info("================");
         Thread.sleep(Integer.MAX_VALUE);

@@ -9,9 +9,11 @@ import reactor.core.publisher.Mono;
  */
 
 public class Test {
+
     @org.junit.Test
-    public void test1(){
+    public void test1() {
         Mono<String> hello = Mono.just("hello");
         hello.subscribe(System.out::println);
     }
+
 }
